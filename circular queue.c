@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 5
+
+int queue[SIZE];
+int front = -1, rear = -1;
+
+void insert(int item) {
+    if ((front == 0 && rear == SIZE - 1) || (rear + 1) % SIZE == front) {
+        printf("Queue Overflow\n");
+    } else if (front == -1) {
+        front = rear = 0;
+        queue[rear] = item;
+        printf("Element Inserted: %d\n", item);
+    } else {
+        rear = (rear + 1) % SIZE;
+        queue[rear] = item;
+        printf("Element Inserted: %d\n", item);
+    }
+}
+
+void delete() {
+    if (front == -1) {
+        printf("Queue Empty\n");
+    } else if (front == rear) {
+        printf("Element Deleted: %d\n", queue[front]);
+        front = rear = -1;
+    } else {
+        printf("Element Deleted: %d\n", queue[front]);
+        front = (front + 1) % SIZE;
+    }
+}
+
+void display() {
+    if (front == -1) {
+        printf("Queue Empty\n");
+    } else {
+        printf("Queue Elements: ");
+        int i = front;
+        while (1) {
+            printf("%d ", queue[i]);
+            if (i == rear) break;
+            i = (i + 1) % SIZE;
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, a;
+
+    while (1) {
+        printf("1.insert\n2.delete\n3.display\n4.exit\n");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter element to insert: ");
+                scanf("%d", &a);
+                insert(a);
+                break;
+
+            case 2:
+                delete();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                exit(0);
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+}
