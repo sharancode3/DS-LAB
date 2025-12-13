@@ -28,7 +28,7 @@ struct Node* insert(struct Node* root, int value) {
     return root;
 }
 
-/* Inorder Traversal */
+
 void inorder(struct Node* root) {
     if (root == NULL)
         return;
@@ -115,3 +115,4 @@ int main() {
 
     return 0;
 }
+
